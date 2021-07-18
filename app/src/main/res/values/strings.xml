@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Fonction rénale</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Suivant</string>
+    <string name="previous">Précédent</string>
+
+    <string name="hello_first_fragment">Fonction rénale</string>
+    <string name="hello_second_fragment">Determiner la posologie du médicament</string>
+    <string name="man">Homme</string>
+    <string name="woman">Femme</string>
+    <string name="creat">Créatininémie</string>
+    <string name="weight">Poids</string>
+    <string name="height">Taille</string>
+    <string name="age">Age</string>
+    <string name="sex">Sexe</string>
+    <string name="black">Origine africaine ou afro-américaine</string>
+    <string name="medics">Médicament</string>
+    <string name="calcDFG">Calculer DFG</string>
+    <string name="reset">Remise à zéro</string>
+
+
+
+
+</resources>
