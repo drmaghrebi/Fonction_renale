@@ -102,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="kg"
+            android:text="@string/kg"
             android:textSize="18sp"
             android:layout_weight="2"
 
@@ -126,31 +126,42 @@
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="µmol/L"
-            android:textSize="18sp"
-            android:layout_weight="2"
 
-            />
+            <!--Switch
+                android:id="@+id/creatunit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:padding="10dp"
+                android:textOff="mg/L"
+
+                android:textOn="µmol/L"
+                android:textSize="18sp" /-->
+
+            <ToggleButton
+                android:id="@+id/creatunit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:checked="false"
+                android:text="@string/creatUnit"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textOff="@string/micromole"
+                android:textOn="@string/mg" />
         </LinearLayout>
         <Switch
             android:id="@+id/race"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/black" />
-
-
+            android:text="@string/black"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
         <TextView
             android:id="@+id/DFG"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="@string/calcDFG"
-            android:textAlignment="center"
-             />
+            android:gravity="center_horizontal" />
         <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">

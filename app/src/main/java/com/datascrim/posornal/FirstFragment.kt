@@ -32,10 +32,10 @@ class FirstFragment : Fragment() {
         view.findViewById<Button>(R.id.calcDFG).setOnClickListener {
 
             try {
-                DFG.text=calculDFG(rbman.isChecked,age.text.toString().toDouble(),weight.text.toString().toFloat(),creat.text.toString().toFloat(),race.isChecked)
+                DFG.text=calculDFG(rbman.isChecked,age.text.toString().toDouble(),weight.text.toString().toFloat(),creat.text.toString().toFloat(),race.isChecked, creatunit.isChecked)
             } catch (e: Exception) {
                 DFG.text=""
-                Toast.makeText(this.context, "Erreur : données manquantes",Toast.LENGTH_LONG).show();
+                Toast.makeText(this.context, "Erreur : données manquantes",Toast.LENGTH_LONG).show()
 
             }
 
@@ -49,19 +49,19 @@ class FirstFragment : Fragment() {
             creat.setText("")
         }
     }
-    fun calculDFG ( sex: Boolean, age: Double, w: Float,  creat: Float , race: Boolean ): String {
-        var cgDFG = 0.1
-        var ckdDFG = 0.1
-        var mdrdDFG = 0.1
+    fun calculDFG ( sex: Boolean, age: Double, w: Float,  creat: Float , race: Boolean , creatunit: Boolean): String {
+        //var cgDFG = 0.1
+        //var ckdDFG = 0.1
+        //var mdrdDFG = 0.1
         var cgKsex = 0.1
         var mdrdKsex = 0.1
         var mdrdKrace= 0.1
         var ckdKsex= 0.1
         var ckdAlphasex= 0.1
         var ckdBetasex= 0.1
-
+        var creatunitconv = 1.0
         var ckdKrace= 0.1
-        var mdrdIDMS=0.94
+        val mdrdIDMS=0.94
 
         when(sex) {
             true -> {
@@ -94,14 +94,16 @@ class FirstFragment : Fragment() {
                 ckdKrace=1.0
             }
         }
-
-        cgDFG = cgKsex * (140 - age) * w / creat
-        ckdDFG = (141f * pow(minOf(creat / ckdKsex, 1.0).toDouble(), ckdAlphasex) * pow(maxOf(creat / ckdKsex, 1.0)
-            .toDouble(), -1.209) * pow(0.993, age)).toDouble()*ckdKrace*ckdBetasex
-        mdrdDFG = 186f * pow((creat * 0.0113), -1.154) * pow(age, -0.203)*mdrdKsex*mdrdKrace * mdrdIDMS
+        if (creatunit) creatunitconv = 88.4
+        val cgDFG = cgKsex * (140 - age) * w / (creat*creatunitconv)
+        val ckdDFG = (141f * pow(minOf(creat*creatunitconv / ckdKsex, 1.0), ckdAlphasex) * pow(
+            maxOf(creat * creatunitconv / ckdKsex, 1.0),
+            -1.209
+        ) * pow(0.993, age))*ckdKrace*ckdBetasex
+        val mdrdDFG = 186f * pow((creat*creatunitconv * 0.0113), -1.154) * pow(age, -0.203)*mdrdKsex*mdrdKrace * mdrdIDMS
 
         //if (race) ckdDFG=ckdDFG*1.159
-        var DFG : String = "Cockcroft-Gault = %.2f".format(cgDFG) + "mL/min\nCKD-EPI = %.2f".format(ckdDFG) + "mL/min/1.73m2\nMDRD = %.2f".format(mdrdDFG)+"mL/min/1.73m2"
+        val DFG : String = "Cockcroft-Gault = %.2f".format(cgDFG) + "mL/min\nCKD-EPI = %.2f".format(ckdDFG) + "mL/min/1.73m2\nMDRD = %.2f".format(mdrdDFG)+"mL/min/1.73m2"
         return DFG
     }
 }
